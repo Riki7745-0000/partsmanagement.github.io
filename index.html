@@ -1,0 +1,25 @@
+<!-- 在原有HTML基础上修改按钮事件 -->
+<button onclick="handleGenerateTask()">生成任务</button>
+
+<script>
+  async function handleGenerateTask() {
+    const taskData = {
+      lims_no: document.getElementById('lims_no').value,
+      location_no: document.getElementById('location_no').value,
+      test_item1: document.getElementById('test_item1').value,
+      // 其他表单字段...
+    };
+    
+    const result = await addTask(taskData);
+    if (result.success) {
+      alert('任务创建成功！');
+      location.reload(); // 刷新列表
+    }
+  }
+
+  // 初始化加载数据
+  window.onload = async () => {
+    const tasks = await loadTasks();
+    renderTaskTable(tasks); // 自定义渲染函数
+  };
+</script>
